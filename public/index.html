@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS遊戲熱度追踪器 - 全球地區分析</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 頭部區域 -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🎯 FPS遊戲熱度追踪器</h1>
+                <p class="subtitle">實時監控熱門FPS遊戲的玩家活躍度和全球地區熱度 🌍</p>
+                <div class="update-info">
+                    <span class="last-update">最後更新: <span id="lastUpdate">載入中...</span></span>
+                    <div class="refresh-btn" onclick="refreshData()">
+                        <span id="refreshIcon">🔄</span> 刷新數據
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 統計卡片區域 -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-content">
+                        <h3 id="totalGames">10</h3>
+                        <p>追踪遊戲</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <h3 id="hotGames">0</h3>
+                        <p>熱門遊戲</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🇹🇼</div>
+                    <div class="stat-content">
+                        <h3 id="taiwanTopGame">-</h3>
+                        <p>台灣最熱門</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-content">
+                        <h3 id="globalRegions">0</h3>
+                        <p>追踪地區</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🇹🇼 新增：台灣熱度排行榜 -->
+        <section class="taiwan-section">
+            <div class="section-header">
+                <h2>🇹🇼 台灣熱度排行榜</h2>
+                <p>FPS遊戲在台灣地區的特別熱度分析</p>
+            </div>
+            <div class="taiwan-ranking" id="taiwanRanking">
+                <div class="loading">載入台灣熱度數據中...</div>
+            </div>
+        </section>
+
+        <!-- 趨勢圖表區域 -->
+        <section class="trending-section">
+            <div class="section-header">
+                <h2>📊 熱度趨勢</h2>
+                <p>過去24小時遊戲熱度變化</p>
+            </div>
+            <div class="trending-games" id="trendingList">
+                <div class="loading">載入趨勢數據中...</div>
+            </div>
+        </section>
+
+        <!-- 遊戲列表區域 -->
+        <section class="games-section">
+            <div class="section-header">
+                <h2>🎯 全球遊戲排行榜</h2>
+                <div class="sort-controls">
+                    <button class="sort-btn active" onclick="sortGames('heat')">全球熱度</button>
+                    <button class="sort-btn" onclick="sortGames('taiwan')">台灣熱度</button>
+                    <button class="sort-btn" onclick="sortGames('players')">玩家數</button>
+                    <button class="sort-btn" onclick="sortGames('viewers')">觀看數</button>
+                </div>
+            </div>
+            <div class="games-grid" id="gamesGrid">
+                <div class="loading">載入遊戲數據中...</div>
+            </div>
+        </section>
+
+        <!-- 🌍 新增：地區對比區域 -->
+        <section class="region-comparison-section">
+            <div class="section-header">
+                <h2>🌍 地區熱度對比</h2>
+                <div class="region-controls">
+                    <select id="regionSelect" multiple>
+                        <option value="台灣">🇹🇼 台灣</option>
+                        <option value="美國">🇺🇸 美國</option>
+                        <option value="日本">🇯🇵 日本</option>
+                        <option value="韓國">🇰🇷 韓國</option>
+                        <option value="中國">🇨🇳 中國</option>
+                        <option value="德國">🇩🇪 德國</option>
+                        <option value="英國">🇬🇧 英國</option>
+                        <option value="巴西">🇧🇷 巴西</option>
+                        <option value="俄羅斯">🇷🇺 俄羅斯</option>
+                    </select>
+                    <button class="compare-btn" onclick="compareRegions()">對比地區</button>
+                </div>
+            </div>
+            <div class="region-comparison" id="regionComparison">
+                <div class="hint">選擇地區進行熱度對比分析</div>
+            </div>
+        </section>
+
+        <!-- 詳細圖表區域 -->
+        <section class="chart-section">
+            <div class="section-header">
+                <h2>📈 詳細分析</h2>
+                <select id="gameSelect" onchange="loadGameChart()">
+                    <option value="">選擇遊戲...</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <canvas id="gameChart"></canvas>
+            </div>
+        </section>
+
+        <!-- 頁腳 -->
+        <footer class="footer">
+            <p>&copy; 2024 FPS遊戲熱度追踪器 | 數據每小時自動更新 | 🌍 全球地區熱度分析</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
