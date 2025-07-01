@@ -5,6 +5,8 @@
   "main": "improved-server.js",
   "scripts": {
     "start": "node improved-server.js",
+    "test-server": "node test-server.js",
+    "check": "node pre-deploy-check.js",
     "dev": "nodemon improved-server.js",
     "build": "npm run build-client",
     "build-client": "webpack --mode production"
@@ -21,6 +23,9 @@
     "nodemon": "^3.0.2",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "keywords": ["fps", "gaming", "heatmap", "tracking"],
   "author": "Your Name",
