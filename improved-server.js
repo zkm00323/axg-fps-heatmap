@@ -5,7 +5,7 @@ const fs = require('fs');
 const cron = require('node-cron');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // 確保data資料夾存在
 const dataDir = path.join(__dirname, 'data');

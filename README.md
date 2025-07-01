@@ -90,7 +90,7 @@
    ```
 
 4. **訪問應用程式**
-   打開瀏覽器，訪問 `http://localhost:3001`
+   打開瀏覽器，訪問 `http://localhost:8080`
 
 ## 📱 使用說明
 
@@ -171,7 +171,7 @@ axg-fps-heatmap/
 您可以創建 `.env` 文件來配置以下選項：
 
 ```env
-PORT=3000                    # 服務器端口
+PORT=8080                    # 服務器端口
 DATABASE_PATH=./data/games.db # 數據庫路径
 UPDATE_INTERVAL=3600000      # 更新間隔（毫秒）
 ```
