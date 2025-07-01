@@ -5,7 +5,6 @@
   "main": "improved-server.js",
   "scripts": {
     "start": "node improved-server.js",
-    "test-server": "node test-server.js",
     "check": "node pre-deploy-check.js",
     "dev": "nodemon improved-server.js",
     "build": "npm run build-client",
