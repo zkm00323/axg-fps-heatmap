@@ -1,10 +1,9 @@
 {
   "app_dir": "/",
-  "build_command": "npm install --production",
+  "build_command": "npm install",
   "start_command": "npm start",
   "cache_dependencies": true,
   "node_version": "18",
-  "install_command": "npm ci --production=false",
   "environment": {
     "NODE_ENV": "production"
   }

@@ -2,11 +2,12 @@
   "name": "fps-game-heatmap",
   "version": "1.0.0",
   "description": "FPS遊戲熱度追踪系統",
-  "main": "improved-server.js",
+  "main": "server-simplified.js",
   "scripts": {
-    "start": "node improved-server.js",
+    "start": "node server-simplified.js",
+    "start-full": "node improved-server.js",
     "check": "node pre-deploy-check.js",
-    "dev": "nodemon improved-server.js",
+    "dev": "nodemon server-simplified.js",
     "build": "npm run build-client",
     "build-client": "webpack --mode production"
   },
